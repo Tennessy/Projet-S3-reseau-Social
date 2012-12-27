@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Hashtable;
 import java.util.LinkedList;
-
 
 public class Admin implements GestionGraphe{
 	Graphe graphe;
@@ -45,13 +45,15 @@ public class Admin implements GestionGraphe{
 
 	//Renvois les arcs sous forme de LinkedList<Sommet>. Le premier de la liste est l'user à l'origine des liens
 	@Override
-	public ArrayList<LinkedList<Sommet>> getArc() {
-		ArrayList<LinkedList<Sommet>> list = new ArrayList<LinkedList<Sommet>>(); 
+	public Hashtable<Sommet, LinkedList<Sommet>> getArc() {
+		Hashtable<Sommet, LinkedList<Sommet>> list = new Hashtable<Sommet, LinkedList<Sommet>>(); 
 		
 		for(Sommet s : graphe.getListeSommet()){
-			LinkedList<Sommet> temp = (s.getV_sortant());
-			temp.addFirst(s);
-			list.add(temp);
+			if(s instanceof User){
+				LinkedList<Sommet> temp = s.getV_sortant();
+				list.put(s, temp);
+			}
+			
 		}
 		
 		return list;
@@ -81,8 +83,13 @@ public class Admin implements GestionGraphe{
 
 	@Override
 	public float getAgeMoyen() {
-		// TODO Auto-generated method stub
-		return 0;
+		int ageM = 0;
+		for(Sommet s : graphe.getListeSommet()){
+			if(s instanceof User){
+				ageM += ((User) s).getAge();
+			}
+		}
+		return ageM/graphe.getNbUser();
 	}
 
 	@Override
@@ -93,19 +100,33 @@ public class Admin implements GestionGraphe{
 
 	@Override
 	public void addUser(int age, String name) {
-		// TODO Auto-generated method stub
+		graphe.addUser(age, name);
 		
+	}
+	
+	public void addUser(User u){
+		graphe.addUser(u.getAge(), u.getName());
 	}
 
 	@Override
 	public void addPage(String name) {
-		// TODO Auto-generated method stub
+		graphe.addPage(name);
 		
 	}
 
 	@Override
 	public void deleteSommet(int id) {
-		// TODO Auto-generated method stub
+		for(Sommet s : graphe.getListeSommet()){
+			int idLien = -1;
+			for(Sommet s2 : s.getV_sortant()){
+				if(s2.getName().equals(graphe.getListeSommet().get(id).getName())){
+					idLien = s2.getNumero();
+				}
+			}
+			if(idLien != -1)
+				s.getV_sortant().remove(idLien);
+		}
+		graphe.getListeSommet().remove(id);
 		
 	}
 
@@ -119,6 +140,12 @@ public class Admin implements GestionGraphe{
 	public Graphe loadGraphe(String fileName) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void deleteArc(Sommet orig, Sommet cible) {
+		
+		
 	}
 
 }
