@@ -32,11 +32,9 @@ public class Reseau {
 		affichageArcs(ad);
 		
 		ad.deleteSommet(1);
-		System.out.println("---");
 		affichageArcs(ad);
 		
 		ad.deleteSommet(1);
-		System.out.println("---");
 		affichageArcs(ad);
 		
 		

@@ -116,15 +116,19 @@ public class Admin implements GestionGraphe{
 
 	@Override
 	public void deleteSommet(int id) {
+		System.out.println("\n --- Suppression de " +graphe.getListeSommet().get(id).getName()+"\n");
+		Sommet temp;
 		for(Sommet s : graphe.getListeSommet()){
-			int idLien = -1;
+			temp = null;
 			for(Sommet s2 : s.getV_sortant()){
 				if(s2.getName().equals(graphe.getListeSommet().get(id).getName())){
-					idLien = s2.getNumero();
+					temp = s2; 
 				}
 			}
-			if(idLien != -1)
-				s.getV_sortant().remove(idLien);
+			if(temp != null){
+				s.getV_sortant().remove(temp);
+				//System.out.println("\n------suppression du Lien " + idLien + " / " + s.getV_sortant().get(idLien)+ "------\n"); 
+			}
 		}
 		graphe.getListeSommet().remove(id);
 		
