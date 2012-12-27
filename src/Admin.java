@@ -70,12 +70,12 @@ public class Admin implements GestionGraphe{
 
 	@Override
 	public int getNbUser() {
-		return 0;
+		return graphe.getNbUser();
 	}
 
 	@Override
 	public int getNbPage() {
-		// TODO Auto-generated method stub
+		this.getNbPage();
 		return 0;
 	}
 
