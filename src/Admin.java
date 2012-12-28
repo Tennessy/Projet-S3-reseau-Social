@@ -77,8 +77,7 @@ public class Admin implements GestionGraphe{
 
 	@Override
 	public int getNbPage() {
-		this.getNbPage();
-		return 0;
+		return graphe.getNbPage();
 	}
 
 	@Override

@@ -12,11 +12,11 @@ public class Reseau {
 		
 		//Test ajout d'utilisateur + affichage info + recuperation User par son nom
 		ad.addUser(20, "hjkl");
-		ad.addUser(20, "ghjk");
+		ad.addUser(30, "ghjk");
 		User ten = (User) ad.getSommet("hjkl");
 		System.out.println("Nom : " + ten.getName() + ", Age : " + ten.getAge());
 		
-		User u = new User(1, 19, "azerty");
+		User u = new User(2, 25, "azerty");
 		ad.addUser(u);
 		
 		// Test ajout amis
@@ -29,6 +29,16 @@ public class Reseau {
 		Page p = (Page) ad.getSommet("Page1");
 		ten.like_page(p);
 		
+		System.out.println("Nombre d'utilisateurs : " + ad.getNbUser());
+		System.out.println("Nombre de pages : " + ad.getNbPage());
+		System.out.println("Age moyen des utilisateurs : " + ad.getAgeMoyen());
+		System.out.println("Nombre d'arcs : " + ad.getNbArc());
+		
+		System.out.println("\n---------Triage par nom---------");
+		for(Sommet s : ad.getSommetByName()){
+			System.out.println(s.getName());
+		}
+		System.out.println();
 		affichageArcs(ad);
 		
 		ad.deleteSommet(1);
@@ -36,6 +46,9 @@ public class Reseau {
 		
 		ad.deleteSommet(1);
 		affichageArcs(ad);
+		
+		System.out.println("Nombre d'arcs : " + ad.getNbArc());
+		
 		
 		
 	}
