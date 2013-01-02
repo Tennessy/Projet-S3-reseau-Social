@@ -136,7 +136,7 @@ public class Admin implements GestionGraphe {
 
 	@Override
 	public void writeGraphe(Graphe g, String fileName) {
-
+		
 	}
 
 	@Override
