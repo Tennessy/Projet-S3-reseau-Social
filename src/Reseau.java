@@ -37,13 +37,13 @@ public class Reseau {
 		
 		System.out.println("\n---------Triage par nom---------");
 		for(Sommet s : ad.getSommetByName()){
-			System.out.println(s.getName());
+			System.out.println(s.getName() + "| id : " + s.getNumero());
 		}
 		System.out.println();
 		affichageArcs(ad);
 		
-		ad.deleteSommet(1);
-		affichageArcs(ad);
+		//ad.deleteSommet(1);
+		//affichageArcs(ad);
 		
 		
 		System.out.println("Nombre d'arcs : " + ad.getNbArc());

@@ -16,6 +16,7 @@ public interface GestionGraphe {
 	public int getNbPage();
 	public float getAgeMoyen();
 	public HashSet<User> getAdminUsers();
+	public Sommet getSommet(int id);
 	
 	public void addUser(int age, String name);
 	public void addUser(User u);

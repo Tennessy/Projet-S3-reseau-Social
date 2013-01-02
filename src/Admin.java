@@ -88,6 +88,15 @@ public class Admin implements GestionGraphe {
 		}
 		return ageM / graphe.getNbUser();
 	}
+	
+	public Sommet getSommet(int id){
+		for(Sommet s : graphe.getListeSommet()){
+			if(s.getNumero() == id){
+				return s;
+			}
+		}
+		return null;
+	}
 
 	@Override
 	public HashSet<User> getAdminUsers() {
@@ -113,24 +122,14 @@ public class Admin implements GestionGraphe {
 
 	@Override
 	public void deleteSommet(int id) {
-		System.out.println("\n --- Suppression de "
-				+ graphe.getListeSommet().get(id).getName() + "\n");
-		Sommet temp;
+		System.out.println("\n --- Suppression de " + graphe.getListeSommet().get(id).getName() + "\n");
+		Sommet sToDelete = this.getSommet(id);
+		
 		for (Sommet s : graphe.getListeSommet()) {
-			temp = null;
-			for (Sommet s2 : s.getV_sortant()) {
-				if (s2.getName().equals(
-						graphe.getListeSommet().get(id).getName())) {
-					temp = s2;
-				}
-			}
-			if (temp != null) {
-				s.getV_sortant().remove(temp);
-				// System.out.println("\n------suppression du Lien " + idLien +
-				// " / " + s.getV_sortant().get(idLien)+ "------\n");
-			}
+			s.getV_sortant().remove(sToDelete);
 		}
-		graphe.getListeSommet().remove(id);
+		
+		graphe.getListeSommet().remove(sToDelete);
 
 	}
 
