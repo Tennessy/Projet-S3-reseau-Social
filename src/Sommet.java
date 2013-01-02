@@ -10,10 +10,10 @@ public abstract class Sommet {
 	}
 
 	protected LinkedList<Sommet> v_sortant;
-	private int numero;
+	protected int numero;
 	protected String name;
 
-	// Création des accesseurs publics
+	// Crï¿½ation des accesseurs publics
 	public LinkedList<Sommet> getV_sortant() {
 		return v_sortant;
 	}
@@ -24,23 +24,6 @@ public abstract class Sommet {
 	
 	public String getName(){
 		return this.name;
-	}
-
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null) {
-			return false;
-		}
-		if (!(obj instanceof Sommet)) {
-			return false;
-		}
-		Sommet other = (Sommet) obj;
-		if (numero != other.numero) {
-			return false;
-		}
-		return true;
 	}
 
 }

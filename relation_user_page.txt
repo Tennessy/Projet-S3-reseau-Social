@@ -1,0 +1,8 @@
+Relations entre individus et pages  
+ 
+==> HJKL d'index 0 
+	* azerty [2]  (Utilisateur)
+	* Page1 [3]  (Page)
+
+==> AZERTY d'index 2 
+
