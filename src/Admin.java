@@ -47,9 +47,10 @@ public class Admin implements GestionGraphe {
 	}
 
 	@Override
-	public ArrayList<Sommet> getSommetByDegre() {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Sommet> getSommetByDegree() {
+		ArrayList<Sommet> ordered = graphe.getListeSommet();
+		Collections.sort(ordered, new IdComparator());
+		return ordered;
 	}
 
 	// Renvois les arcs sous forme de LinkedList<Sommet>. Le premier de la liste
@@ -112,8 +113,13 @@ public class Admin implements GestionGraphe {
 
 	@Override
 	public HashSet<User> getAdminUsers() {
-		// TODO Auto-generated method stub
-		return null;
+		HashSet<User> listeAdmins = new HashSet<User>();
+		for(Sommet s : this.graphe.getListeSommet()){
+			if(s instanceof Page){
+				listeAdmins.add( ((Page) s).getAdmin() );
+			}
+		}
+		return listeAdmins;
 	}
 
 	@Override
@@ -127,8 +133,8 @@ public class Admin implements GestionGraphe {
 	}
 
 	@Override
-	public void addPage(String name) {
-		graphe.addPage(name);
+	public void addPage(String name, User admin){
+		graphe.addPage(name, admin);
 
 	}
 
@@ -166,7 +172,7 @@ public class Admin implements GestionGraphe {
 						break;
 						
 					case 1:
-						graphe.addPage(Integer.parseInt(infos[0]), infos[1]);
+						graphe.addPage(Integer.parseInt(infos[0]), infos[1], (User) this.getSommet(Integer.parseInt(infos[2])));
 						break;
 						
 					case 2:
@@ -189,21 +195,28 @@ public class Admin implements GestionGraphe {
 			System.out.println("Le fichier n'existe pas");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Erreur lors de la lecture du fichier");
 		}finally{
 			try {
 				br.close();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println("Erreur lors de la lecture du fichier");
 			}
 		}
 		
 	}
 
 	@Override
-	public void deleteArc(Sommet orig, Sommet cible) {
-
+	public void deleteArc(User orig, Sommet cible) {
+		User t = (User) this.getSommet(orig.getName());
+		if(cible instanceof Page){
+			t.unlike_page((Page)cible);
+		}
+		else if(cible instanceof User){
+			t.supprimer_ami((User) cible);
+		}
+		
 	}
 
 	// Stocke toutes les relations des utilisateurs dans le fichier nommé
@@ -231,10 +244,10 @@ public class Admin implements GestionGraphe {
 		BufferedWriter c = new BufferedWriter(new FileWriter(graphe.getName() + "-pages.txt"));
 		for(Sommet x : graphe.getListeSommet()){
 			if(x instanceof Page){
-				c.write(x+"\n");
+				c.write(x + "|" + ((Page)x).getAdmin().getNumero() + "\n");
 			}
 			else if(x instanceof User){
-				b.write(x+"\n");
+				b.write(x + "\n");
 			}
 		}
 		b.close();c.close();

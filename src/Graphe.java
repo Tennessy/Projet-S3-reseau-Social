@@ -64,16 +64,16 @@ public class Graphe {
 		return false;
 	}
 	
-	public void addPage(String name){
-		if(!listeSommet.contains(new Page(0,name))){
-			listeSommet.add(new Page(this.lastId, name));
+	public void addPage(String name, User admin){
+		if(!listeSommet.contains(new Page(0,name, admin))){
+			listeSommet.add(new Page(this.lastId, name, admin));
 			lastId++;
 		}
 		else
 			System.out.println("La page '"+name+"' existe déja");
 	}
 	
-	public boolean addPage(int id, String name){
+	public void addPage(int id, String name, User admin){
 		boolean exist = false;
 		for(Sommet s : this.listeSommet){
 			if(s.getNumero() == id){
@@ -81,12 +81,10 @@ public class Graphe {
 			}
 		}
 		if(!exist){
-			listeSommet.add(new Page(id, name));
+			listeSommet.add(new Page(id, name, admin));
 			if(id>this.lastId)
 				this.lastId = id;
-			return true;
 		}
-		return false;
 	}
 	
 	public String getName(){

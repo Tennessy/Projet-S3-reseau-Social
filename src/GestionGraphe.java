@@ -10,7 +10,7 @@ public interface GestionGraphe {
 	public int getNbArc();
 	public ArrayList<Sommet> getSommet();
 	public ArrayList<Sommet> getSommetByName();
-	public ArrayList<Sommet> getSommetByDegre();
+	public ArrayList<Sommet> getSommetByDegree();
 	public Hashtable<Sommet, LinkedList<Sommet>> getArc();
 	public Sommet getSommet(String name);
 	public int getNbUser();
@@ -21,9 +21,9 @@ public interface GestionGraphe {
 	
 	public void addUser(int age, String name);
 	public void addUser(User u);
-	public void addPage(String name);
+	public void addPage(String name, User admin);
 	public void deleteSommet(int id);
-	public void deleteArc(Sommet orig, Sommet cible);
+	public void deleteArc(User orig, Sommet cible);
 	
 	public void relationship() throws IOException;
 	public void users_pages() throws IOException;

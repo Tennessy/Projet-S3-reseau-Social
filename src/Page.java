@@ -1,9 +1,14 @@
+import java.util.ArrayList;
+
 
 public class Page extends Sommet {
-// Cr�ation d'une page ayant un numero et un nom
 	
-	public Page(int num,String s) {
+	protected User admin;
+	
+// Cr�ation d'une page ayant un numero et un nom	
+	public Page(int num,String s, User admin) {
 		super(num, s);
+		this.admin = admin;
 	}
 	public boolean equals(Object obj){
 		if (this == obj) {
@@ -23,6 +28,10 @@ public class Page extends Sommet {
 	
 	public String toString(){
 		return numero+"|"+name;
+	}
+	
+	public User getAdmin(){
+		return this.admin;
 	}
 
 }

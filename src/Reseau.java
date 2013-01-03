@@ -28,18 +28,18 @@ public class Reseau {
 		System.out.println();
 		
 		//Test ajout page + like page
-		ad.addPage("Page1");
-		ad.addPage("facebook");
+		ad.addPage("Page1", ten);
+		ad.addPage("facebook", ten);
 		Page p = (Page) ad.getSommet("Page1");
 		ten.like_page(p);
-
+		
 		
 		System.out.println("\n---------Triage par nom---------");
 		for(Sommet s : ad.getSommetByName()){
 			System.out.println(s.getName() + "| id : " + s.getNumero());
 		}
-		ad.addPage("Page2");
-		ad.addPage("algo");
+		ad.addPage("Page2", ten);
+		ad.addPage("algo", u);
 		System.out.println();
 		affichageArcs(ad);
 		
@@ -57,6 +57,20 @@ public class Reseau {
 		for(Sommet s : ad.getSommetByName()){
 			System.out.println(s.getName() + "| id : " + s.getNumero() + " User? : " + (s instanceof User));
 		}
+		System.out.println("-----");
+		for(Sommet s : ad.getSommetByDegree()){
+			System.out.println(s.getName() + "| id : " + s.getNumero() + " User? : " + (s instanceof User));
+		}
+		System.out.println("-----");
+		
+		affichageArcs(ad);
+		ad.deleteArc(ten, u);
+		ad.deleteArc(ten, ad.getSommet("Page1"));
+		affichageArcs(ad);
+		System.out.println("--Liste admins de page---");
+		for(User ua : ad.getAdminUsers()){
+			System.out.println(ua.getName());
+		}
 	}
 	
 	// recuperation des arcs et affichage
@@ -68,6 +82,12 @@ public class Reseau {
 				 System.out.print(" -> " + s.getName());
 			 }
 			 System.out.println();
+		}
+	}
+	
+	public static void affichageArcs(User u){
+		for( Sommet s : u.getV_sortant()){
+			System.out.println(s.getName());
 		}
 	}
 
