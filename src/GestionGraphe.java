@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Hashtable;
@@ -24,6 +25,7 @@ public interface GestionGraphe {
 	public void deleteSommet(int id);
 	public void deleteArc(Sommet orig, Sommet cible);
 	
-	public void writeGraphe(Graphe g, String fileName);
-	public Graphe loadGraphe(String fileName);
+	public void relationship() throws IOException;
+	public void users_pages() throws IOException;
+	public void loadGraphe(String fileName);
 }

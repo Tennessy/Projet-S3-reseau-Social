@@ -2,6 +2,11 @@ import java.util.*;
 
 public class User extends Sommet {
 
+	@Override
+	public String toString() {
+		return numero + "|" + name + "|" + age;
+	}
+
 	private int age;
 
 	// Cr�ation d'un user ayant un numero un nom & un age
@@ -94,8 +99,7 @@ public class User extends Sommet {
 	// un individu aime une page
 	public void like_page(Page p) {
 		if (v_sortant.contains(p))
-			System.out.println("La page  " + p.getName()
-					+ " fait deja parti des voisins sortants");
+			System.out.println("La page  " + p.getName() + " fait deja parti des voisins sortants");
 
 		else {
 			v_sortant.add(p);

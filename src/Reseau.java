@@ -10,6 +10,8 @@ public class Reseau {
 	 */
 	public static void main(String[] args) throws IOException {
 		Admin ad = new Admin();
+		ad.creerGraphe("test2");
+		
 		
 		//Test ajout d'utilisateur + affichage info + recuperation User par son nom
 		ad.addUser(20, "hjkl");
@@ -27,29 +29,34 @@ public class Reseau {
 		
 		//Test ajout page + like page
 		ad.addPage("Page1");
+		ad.addPage("facebook");
 		Page p = (Page) ad.getSommet("Page1");
 		ten.like_page(p);
-		
-		System.out.println("Nombre d'utilisateurs : " + ad.getNbUser());
-		System.out.println("Nombre de pages : " + ad.getNbPage());
-		System.out.println("Age moyen des utilisateurs : " + ad.getAgeMoyen());
-		System.out.println("Nombre d'arcs : " + ad.getNbArc());
+
 		
 		System.out.println("\n---------Triage par nom---------");
 		for(Sommet s : ad.getSommetByName()){
 			System.out.println(s.getName() + "| id : " + s.getNumero());
 		}
+		ad.addPage("Page2");
+		ad.addPage("algo");
 		System.out.println();
 		affichageArcs(ad);
-		
-		//ad.deleteSommet(1);
-		//affichageArcs(ad);
 		
 		
 		System.out.println("Nombre d'arcs : " + ad.getNbArc());
 		
 		
 			ad.relationship();
+			ad.users_pages();
+			
+		System.out.println("----------Fin Save---------");
+		ad.loadGraphe("test2");
+		affichageArcs(ad);
+		System.out.println("\n---------Triage par nom---------");
+		for(Sommet s : ad.getSommetByName()){
+			System.out.println(s.getName() + "| id : " + s.getNumero() + " User? : " + (s instanceof User));
+		}
 	}
 	
 	// recuperation des arcs et affichage

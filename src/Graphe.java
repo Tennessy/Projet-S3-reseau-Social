@@ -3,14 +3,16 @@ import java.util.ArrayList;
 public class Graphe {
 	protected ArrayList<Sommet> listeSommet;
 	protected int lastId;
+	protected String name;
 
 	public int getNbSommet() {
 		return this.listeSommet.size();
 	}
 
-	public Graphe(){
+	public Graphe(String name){
 		listeSommet = new ArrayList<Sommet>();
 		this.lastId = 0;
+		this.name = name;
 	}
 
 	public ArrayList<Sommet> getListeSommet(){
@@ -46,9 +48,49 @@ public class Graphe {
 		lastId++;
 	}
 
-	public void addPage(String name){
-		listeSommet.add(new Page(this.lastId, name));
-		lastId++;
+	public boolean addUser(int id, int age, String name){
+		boolean exist = false;
+		for(Sommet s : this.listeSommet){
+			if(s.getNumero() == id){
+				exist = true;
+			}
+		}
+		if(!exist){
+			listeSommet.add(new User(id, age, name));
+			if(id>this.lastId)
+				this.lastId = id;
+			return true;
+		}
+		return false;
 	}
-
+	
+	public void addPage(String name){
+		if(!listeSommet.contains(new Page(0,name))){
+			listeSommet.add(new Page(this.lastId, name));
+			lastId++;
+		}
+		else
+			System.out.println("La page '"+name+"' existe déja");
+	}
+	
+	public boolean addPage(int id, String name){
+		boolean exist = false;
+		for(Sommet s : this.listeSommet){
+			if(s.getNumero() == id){
+				exist = true;
+			}
+		}
+		if(!exist){
+			listeSommet.add(new Page(id, name));
+			if(id>this.lastId)
+				this.lastId = id;
+			return true;
+		}
+		return false;
+	}
+	
+	public String getName(){
+		return this.name;
+	}
+	
 }

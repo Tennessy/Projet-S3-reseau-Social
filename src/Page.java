@@ -16,12 +16,13 @@ public class Page extends Sommet {
 			return false;
 		}
 		Page other = (Page) obj;
-		if (this.numero != other.getNumero()) {
-			return false;
-		}
 		if(!name.equals(other.getName()))
 			return false;
 		return true;
+	}
+	
+	public String toString(){
+		return numero+"|"+name;
 	}
 
 }
