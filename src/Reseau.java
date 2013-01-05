@@ -9,11 +9,11 @@ public class Reseau {
 	 * @throws IOException
 	 */
 	public static void main(String[] args) throws IOException {
-		Scanner sc = new Scanner(System.in);
 
 		Graphe g = choixGraphe();
 		choixAction(g);
-
+		
+		
 	}
 
 	public static Graphe choixGraphe() {
@@ -50,7 +50,8 @@ public class Reseau {
 			}
 
 		} while (g == null);
-
+		
+		sc.close();
 		return g;
 	}
 
@@ -101,8 +102,7 @@ public class Reseau {
 						age = -1;
 					}
 				} while (age < 0);
-				User u = g.addUser(age, name);
-				//choixActionUser(u);
+				g.addUser(age, name);
 				break;
 				
 			case 2:
@@ -123,7 +123,7 @@ public class Reseau {
 						}
 					}
 				} while (idAdmin < 0);
-				Page p = g.addPage(namePage, (User) g.getSommet(idAdmin));
+				g.addPage(namePage, (User) g.getSommet(idAdmin));
 				break;
 				
 			case 3:
@@ -304,10 +304,10 @@ public class Reseau {
 			}
 			System.out.println("----------------------------------");
 		} while (choix != 19);
-		
+		sc.close();
 		System.out.println("FIN");
 		
-
+		
 	}
 
 
