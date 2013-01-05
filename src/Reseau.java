@@ -128,7 +128,8 @@ public class Reseau {
 						}
 					}
 				} while (idAdmin < 0);
-				g.addPage(namePage, (User) g.getSommet(idAdmin));
+				Page p = g.addPage(namePage, (User) g.getSommet(idAdmin));
+				System.out.println("Page ajoutée, id : " + p.getNumero());
 				break;
 				
 			case 3:
@@ -153,7 +154,7 @@ public class Reseau {
 			case 7:
 				System.out.println("Ensemble des sommets pas degre sortant : ");
 				for(Sommet s : g.getSommetByDegree()){
-					System.out.println(s.getName() + " -> id : " + s.getNumero() + ", nom : " + s.getName() + ", de type : " + s.getClass() + "Nombre de relation : " + s.getV_sortant().size());
+					System.out.println(s.getName() + " -> id : " + s.getNumero() + ", nom : " + s.getName() + ", Nombre de relation : " + s.getV_sortant().size() + ", de type : " + s.getClass());
 				}
 				break;
 				
