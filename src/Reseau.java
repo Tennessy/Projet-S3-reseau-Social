@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.*;
+import java.util.Map.Entry;
 
 
 public class Reseau {
@@ -10,9 +11,8 @@ public class Reseau {
 	 */
 	public static void main(String[] args) throws IOException {
 		Admin ad = new Admin();
-		ad.creerGraphe("test2");
 		
-		
+/*		
 		//Test ajout d'utilisateur + affichage info + recuperation User par son nom
 		ad.addUser(20, "hjkl");
 		ad.addUser(30, "ghjk");
@@ -71,6 +71,27 @@ public class Reseau {
 		for(User ua : ad.getAdminUsers()){
 			System.out.println(ua.getName());
 		}
+*/		
+		
+		
+		ad.loadGraphe("test2");
+		
+		System.out.println("-----------------");
+		for(Sommet s : ad.getSommetByName()){
+			System.out.println(s.getName() + "| id : " + s.getNumero() + " User? : " + (s instanceof User));
+		}
+		System.out.println("-----------------");
+		for(Sommet s : ad.getSommet()){
+			System.out.println(s.getName() + "| id : " + s.getNumero() + " User? : " + (s instanceof User));
+		}
+		System.out.println("-----------------");
+		affichageArcs(ad);
+		System.out.println("-----------------\n");
+		
+		affichageArcs(ad);
+		
+		affichageDistance(ad, ad.getSommet(14));
+		
 	}
 	
 	// recuperation des arcs et affichage
@@ -88,6 +109,13 @@ public class Reseau {
 	public static void affichageArcs(User u){
 		for( Sommet s : u.getV_sortant()){
 			System.out.println(s.getName());
+		}
+	}
+	
+	public static void affichageDistance(Admin ad, Sommet s){
+		System.out.println("---Distances entre " + s.getName() + " et tous les autres sommets");
+		for (Entry<Sommet, Integer> entry : ad.getDistanceBetweenSommets(s).entrySet()){
+		      System.out.println(entry.getKey().getName() + " -> " + entry.getValue());
 		}
 	}
 

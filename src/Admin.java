@@ -252,5 +252,41 @@ public class Admin implements GestionGraphe {
 		}
 		b.close();c.close();
 	}
+	
+	public Hashtable<Sommet, Integer> getDistanceBetweenSommets(Sommet s){
+		Hashtable<Sommet, Integer> dist = new Hashtable<Sommet, Integer>();
+		ArrayList<Sommet> listSommets = new ArrayList<Sommet>(this.getSommet());
+		for(Sommet tempS : listSommets){
+				dist.put(tempS, 10000000);
+		}
+		dist.put(s, 0);
+		
+		while(!listSommets.isEmpty()){
+			Sommet plusPetitSommet = null;
+			
+			for(Sommet tempS : listSommets){
+				if(plusPetitSommet == null){
+					plusPetitSommet = tempS;
+				}
+				else if(dist.get(tempS) < dist.get(plusPetitSommet)){
+					plusPetitSommet = tempS;
+				}
+			}
+				
+				listSommets.remove(plusPetitSommet);
+				for(Sommet amiS : plusPetitSommet.getV_sortant()){
+					int d = dist.get(plusPetitSommet) + 1;
+					if(d <= dist.get(amiS)){
+						dist.put(amiS, d);
+					}
+				}
+			
+		}
+		
+		
+		return dist;
+	}
+	
+	
 
 }
