@@ -76,8 +76,10 @@ public class Reseau {
 			System.out.println("13/Afficher l'ensemble des Utilisateurs etant administrateur de page");
 			System.out.println("14/Afficher les informations d'un Sommet");
 			System.out.println("15/Ajouter relation");
-			System.out.println("16/Enregistrer le graphe");
-			System.out.println("17/Quitter");
+			System.out.println("16/Afficher les Sommets les plus/moins influents");
+			System.out.println("17/Afficher la moyenne d'age");
+			System.out.println("18/Enregistrer le graphe");
+			System.out.println("19/Quitter");
 			try {
 				choix = Integer.parseInt(sc.next());
 			} catch (Exception e) {
@@ -146,7 +148,7 @@ public class Reseau {
 			case 7:
 				System.out.println("Ensemble des sommets pas degre sortant : ");
 				for(Sommet s : g.getSommetByDegree()){
-					System.out.println(s.getName() + " -> id : " + s.getNumero() + ", nom : " + s.getName() + ", de type : " + s.getClass());
+					System.out.println(s.getName() + " -> id : " + s.getNumero() + ", nom : " + s.getName() + ", de type : " + s.getClass() + "Nombre de relation : " + s.getV_sortant().size());
 				}
 				break;
 				
@@ -230,6 +232,11 @@ public class Reseau {
 							System.out.print(s.getName() + ", ");
 						}
 						System.out.println();
+						
+						System.out.println("---Distances entre " + tempS.getName()+ " et tous les autres sommets---");
+						for (Entry<Sommet, Integer> entry : g.getDistanceBetweenSommets(tempS).entrySet()) {
+							System.out.println(entry.getKey().getName() + " -> "+ entry.getValue() + " liens");
+						}
 					}
 					else if(tempS instanceof Page){
 						System.out.println("Administrateur de ce Sommet : " + ((Page)tempS).getAdmin().getName() + " (Id : " + ((Page)tempS).getAdmin().getNumero() + ")");
@@ -270,6 +277,23 @@ public class Reseau {
 				break;
 				
 			case 16:
+				System.out.println(g.PlusInfluent_User());
+				System.out.println(g.MoinsInfluent_User());
+				System.out.println(g.PlusInfluent_Page());
+				System.out.println(g.MoinsInfluent_Page());
+				System.out.println(g.PlusInfluent());
+				System.out.println(g.MoinsInfluent());
+				System.out.println("---Debug---");
+				for(Sommet s : g.getListeSommet()){
+					System.out.println(s.getName() + " => " + s.getPagerank());
+				}
+				break;
+				
+			case 17:
+				System.out.println("La moyenne d'age est de : " + g.getAgeMoyen());
+				break;
+				
+			case 18:
 				try {
 					g.users_pages();
 					g.relationship();
@@ -279,26 +303,12 @@ public class Reseau {
 				break;
 			}
 			System.out.println("----------------------------------");
-		} while (choix != 17);
+		} while (choix != 19);
 		
 		System.out.println("FIN");
 		
 
 	}
 
-	public static void choixActionUser(User u) {
-		
-	}
-
-
-	public static void affichageDistance(Graphe g, Sommet s) {
-		System.out.println("---Distances entre " + s.getName()
-				+ " et tous les autres sommets");
-		for (Entry<Sommet, Integer> entry : g.getDistanceBetweenSommets(s)
-				.entrySet()) {
-			System.out.println(entry.getKey().getName() + " -> "
-					+ entry.getValue());
-		}
-	}
 
 }

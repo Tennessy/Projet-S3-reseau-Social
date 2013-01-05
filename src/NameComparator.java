@@ -1,6 +1,6 @@
 import java.util.Comparator;
 
-
+//Class implémentant l'interface Comparator, permettant ainsi d'utiliser la méthode sort de Collection pour trier les Sommets par leur nom
 public class NameComparator implements Comparator<Sommet>{
 
 	@Override
