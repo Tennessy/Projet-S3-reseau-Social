@@ -79,7 +79,7 @@ public class Graphe {
 		if(!exist){
 			listeSommet.add(new User(id, age, name));
 			if(id>this.lastId)
-				this.lastId = id;
+				this.lastId = id+1;
 		}
 	}
 	
@@ -102,7 +102,7 @@ public class Graphe {
 		if(!exist){
 			listeSommet.add(new Page(id, name, admin));
 			if(id>this.lastId)
-				this.lastId = id;
+				this.lastId = id+1;
 		}
 	}
 	
