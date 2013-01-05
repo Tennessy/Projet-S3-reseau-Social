@@ -51,13 +51,13 @@ public class Reseau {
 
 		} while (g == null);
 		
-		sc.close();
 		return g;
 	}
 
 	public static void choixAction(Graphe g) {
 		int choix = -1, age = 0, idOrig = 0, idCible =0, idASup = 0, idAdmin = 0;
 		String name;
+		
 		Scanner sc = new Scanner(System.in);
 
 		do {
@@ -81,11 +81,15 @@ public class Reseau {
 			System.out.println("17/Afficher la moyenne d'age");
 			System.out.println("18/Enregistrer le graphe");
 			System.out.println("19/Quitter");
+			
 			try {
 				choix = Integer.parseInt(sc.next());
+				System.out.println("---------");
 			} catch (Exception e) {
 				choix = -1;
+				e.printStackTrace();
 			}
+			
 			
 			sc.nextLine();
 			
@@ -102,7 +106,8 @@ public class Reseau {
 						age = -1;
 					}
 				} while (age < 0);
-				g.addUser(age, name);
+				User u =g.addUser(age, name);
+				System.out.println("User ajouté, id : " + u.getNumero());
 				break;
 				
 			case 2:
@@ -235,7 +240,11 @@ public class Reseau {
 						
 						System.out.println("---Distances entre " + tempS.getName()+ " et tous les autres sommets---");
 						for (Entry<Sommet, Integer> entry : g.getDistanceBetweenSommets(tempS).entrySet()) {
-							System.out.println(entry.getKey().getName() + " -> "+ entry.getValue() + " liens");
+							System.out.print(entry.getKey().getName() + " -> ");
+									if(entry.getValue() != 10000000)
+										System.out.println(entry.getValue() + " liens");
+									else
+										System.out.println("Aucun lien");
 						}
 					}
 					else if(tempS instanceof Page){
@@ -283,10 +292,6 @@ public class Reseau {
 				System.out.println(g.MoinsInfluent_Page());
 				System.out.println(g.PlusInfluent());
 				System.out.println(g.MoinsInfluent());
-				System.out.println("---Debug---");
-				for(Sommet s : g.getListeSommet()){
-					System.out.println(s.getName() + " => " + s.getPagerank());
-				}
 				break;
 				
 			case 17:
@@ -304,7 +309,6 @@ public class Reseau {
 			}
 			System.out.println("----------------------------------");
 		} while (choix != 19);
-		sc.close();
 		System.out.println("FIN");
 		
 		

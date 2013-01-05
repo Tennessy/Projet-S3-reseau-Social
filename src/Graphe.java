@@ -492,7 +492,7 @@ public class Graphe {
 			try {
 				for (Sommet x : this.listeSommet) {
 					if (x.getPagerank() == moins)
-						s += "-" + x + "\n";
+						s += "-" + x.getName() + "\n";
 				}
 			} catch (Exception e) {
 				System.out.println(e);
